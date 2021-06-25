@@ -3,6 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/jiyeyuran/mediasoup-go"
+	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/rs/zerolog"
@@ -11,6 +14,9 @@ import (
 
 func main() {
 	zerolog.SetGlobalLevel(zerolog.DebugLevel)
+
+	appDir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+	mediasoup.WorkerBin = fmt.Sprintf("%v/mediasoup-worker", appDir)
 
 	viper.SetConfigName("config")
 	viper.AddConfigPath("/etc/mediasoup-demo/")
